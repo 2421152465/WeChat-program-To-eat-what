@@ -1,0 +1,1 @@
+<view class="menu_top data-v-368aef34"><tabs class="ment_une data-v-368aef34" vue-id="9ad1f540-1" tabs="{{tabs}}" data-event-opts="{{[['^itemChange',[['handleItem']]]]}}" bind:itemChange="__e" bind:__l="__l"></tabs></view>

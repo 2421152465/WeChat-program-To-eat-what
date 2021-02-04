@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "北餐厅",
+  "usingComponents": {
+    "tabs": "/components/Tabs/index"
+  }
+}

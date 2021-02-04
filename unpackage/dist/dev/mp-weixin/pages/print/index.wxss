@@ -1,0 +1,18 @@
+
+.print.data-v-6b1e3307{
+	width: 750rpx;
+	padding-top: 6rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-align-content: center;
+	        align-content: center;
+}
+.imageu.data-v-6b1e3307{
+	width: 94%;
+	border-radius: 20rpx;
+}
+
