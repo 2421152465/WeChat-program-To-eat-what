@@ -1,4 +1,5 @@
 <script>
+	/*生命周期方法*/
 	export default {
 		onLaunch: function() {
 
