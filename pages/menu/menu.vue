@@ -18,17 +18,17 @@
 				 tabs:[
 					 {
 						 id:0,
-						 name:"One",
+						 name:"一楼",
 						 whether:true
 					 },
 					 {
 						 id:1,
-						 name:"Two",
+						 name:"二楼",
 						 whether:false
 					 }, 
 					 {
 						 id:2,
-						 name:"Three",
+						 name:"三楼",
 						 whether:false
 					 }
 				 ]
@@ -45,5 +45,5 @@
 </script>
 
 <style scoped>
-	
+
 </style>

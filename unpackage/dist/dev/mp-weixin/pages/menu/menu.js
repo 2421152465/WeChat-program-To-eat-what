@@ -137,7 +137,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var Tabs = function Tabs() {__webpack_require__.e(/*! require.ensure | components/Tabs/index */ "components/Tabs/index").then((function () {return resolve(__webpack_require__(/*! @/components/Tabs/index.vue */ 41));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var Tabs = function Tabs() {__webpack_require__.e(/*! require.ensure | components/Tabs/index */ "components/Tabs/index").then((function () {return resolve(__webpack_require__(/*! @/components/Tabs/index.vue */ 43));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
     Tabs: Tabs },
@@ -148,17 +148,17 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 
       tabs: [
       {
         id: 0,
-        name: "One",
+        name: "一楼",
         whether: true },
 
       {
         id: 1,
-        name: "Two",
+        name: "二楼",
         whether: false },
 
       {
         id: 2,
-        name: "Three",
+        name: "三楼",
         whether: false }] };
 
 

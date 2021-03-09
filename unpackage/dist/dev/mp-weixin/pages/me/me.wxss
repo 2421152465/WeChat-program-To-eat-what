@@ -1,0 +1,12 @@
+
+.top_tw image{
+	width: 18px;
+}
+.top_tw{
+	background-color: rgb(255,251,232);
+	color: rgb(234,180,98);
+	font-size: 50rpx;
+	font-family:"华文楷体";
+	margin-bottom: 20rpx;
+}
+

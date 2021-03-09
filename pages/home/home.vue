@@ -1,5 +1,6 @@
 <template>
 	<view class="content">
+		<view class="top_t"><image src="../../static/icon/gong.png" mode="widthFix"></image>开始~点击手机号或菜名直接跳转相应界面！~</view>
 		<view class="content_title">
 			<view class="bot_h2">许职吃点啥!</view>
 			<view class="bot_name">
@@ -8,8 +9,8 @@
 			<view class="bot_sjNumber" @click="callUp">
 				{{sjnum}} 
 			</view>
-			<button  type="default" @click="handStart" :disabled="isActive">开始</button>
-			<button type="default" @click="handEnd" :disabled="!isActive">结束</button>
+			<button type="default" @click="handStart" :disabled="isActive" :class="{active:!isActive}">开始</button>
+			<button type="default" @click="handEnd" :disabled="!isActive" :class="{active:isActive}">结束</button>
 		</view>
 	</view> 
 </template>
@@ -32,7 +33,7 @@
 			handStart(){
 				this.isActive=true;
 				this.timeNo=setInterval(()=>{
-					const index = Math.floor(Math.random()*(4-0)-0);
+					const index = Math.floor(Math.random()*(66-0)-0);
 					this.stnum=this.textImg[index].name;
 					this.sjnum=this.textImg[index].sjHao;
 					this.index = index
@@ -88,6 +89,22 @@
 	.bot_h2{ 
 	  font-size: 60rpx;
 	  font-family: '楷体';
-	  font-weight: bold
+	  font-weight: bold;
+		margin-bottom: 40rpx;
+	}
+	.top_t{
+		background-color: rgb(255,251,232);
+		color: rgb(234,180,98);
+		font-size: 34rpx;
+		font-family:"华文楷体";
+	}
+	.top_t image{
+		width: 18px;
+	}
+	
+	
+	.active{
+		background-color: #007bff;
+		color: white;
 	}
 </style>

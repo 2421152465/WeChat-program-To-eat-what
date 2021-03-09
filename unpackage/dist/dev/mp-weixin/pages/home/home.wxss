@@ -21,6 +21,20 @@ page.data-v-92bb8f34{
 .bot_h2.data-v-92bb8f34{ 
   font-size: 60rpx;
   font-family: '楷体';
-  font-weight: bold
+  font-weight: bold;
+	margin-bottom: 40rpx;
+}
+.top_t.data-v-92bb8f34{
+	background-color: rgb(255,251,232);
+	color: rgb(234,180,98);
+	font-size: 34rpx;
+	font-family:"华文楷体";
+}
+.top_t image.data-v-92bb8f34{
+	width: 18px;
+}
+.active.data-v-92bb8f34{
+	background-color: #007bff;
+	color: white;
 }
 

@@ -1,18 +1,19 @@
 
 .print.data-v-6b1e3307{
-	width: 750rpx;
-	padding-top: 6rpx;
-	display: -webkit-box;
-	display: -webkit-flex;
+	/*width: 750rpx;
+	 padding-top: 6rpx;
 	display: flex;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	        justify-content: center;
-	-webkit-align-content: center;
-	        align-content: center;
+	justify-content: center;
+	align-content: center; */
+	width: 750rpx;
 }
 .imageu.data-v-6b1e3307{
-	width: 94%;
+	width:100%;
+	height: 700rpx;
 	border-radius: 20rpx;
+}
+.btncall.data-v-6b1e3307{
+	background-color: #07c160;
+	color: white;
 }
 

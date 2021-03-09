@@ -14,7 +14,7 @@
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#a20a0a",
+    "selectedColor": "#0094ff",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
@@ -34,7 +34,7 @@
         "pagePath": "pages/me/me",
         "iconPath": "static/icon/Me.png",
         "selectedIconPath": "static/icon/Me1.png",
-        "text": "我的"
+        "text": "发现"
       }
     ]
   },

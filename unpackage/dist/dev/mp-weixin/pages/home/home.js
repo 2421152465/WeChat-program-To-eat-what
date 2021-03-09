@@ -154,6 +154,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
 var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -170,9 +171,9 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 
 //
 //
 //
+//
 var _default = { data: function data() {return { textImg: [], timeNo: 0, stnum: "---", sjnum: "", isActive: false, index: 0 };}, methods: { //点击开始
-    handStart: function handStart() {var _this = this;this.isActive = true;this.timeNo = setInterval(function () {var index = Math.floor(Math.random() * (4 - 0) - 0);
-        _this.stnum = _this.textImg[index].name;
+    handStart: function handStart() {var _this = this;this.isActive = true;this.timeNo = setInterval(function () {var index = Math.floor(Math.random() * (66 - 0) - 0);_this.stnum = _this.textImg[index].name;
         _this.sjnum = _this.textImg[index].sjHao;
         _this.index = index;
       }, 40);

@@ -18,13 +18,13 @@
 			
 			<block v-if="tabs[1].whether" >
 				<navigator class="ment_first" v-for="(item,index) in canteenDataTwe"
-				 :key="item.id" url="../../pages/print/index" @click="skip(index)">
+				 :key="item.id" url="../../pages/print/index" @click="skip(index+25)">
 						{{item.name}}
 				</navigator>
 			</block>
 			<block v-if="tabs[2].whether">
 				<navigator class="ment_first" v-for="(item,index) in canteenDataThree"
-				 :key="item.id" url="../../pages/print/index" @click="skip(index)">
+				 :key="item.id" url="../../pages/print/index" @click="skip(index+56)">
 						{{item.name}}
 				</navigator>
 			</block>
@@ -45,6 +45,7 @@
 				canteenDataTwe:[],
 				canteenDataThree:[],
 				baseUrl:store.state.count,
+				numsu:0,
 			}
 		},
 		methods:{
@@ -64,12 +65,14 @@
 		mounted(){
 			const textm = store.state.textImg;
 			textm.forEach((v,i,a)=>{
-				if(i<=10){
-					this.canteenDataOne.push(v)
-				}else if(i>=11&i<=18){
-					this.canteenDataTwe.push(v)
+				if(i<=24){
+					this.canteenDataOne.push(v);
+
+				}else if(i>=25&&i<=55){
+					this.canteenDataTwe.push(v);
+
 				}else{
-					this.canteenDataThree.push(v)
+					this.canteenDataThree.push(v);
 				}
 			})
 		}
@@ -97,10 +100,13 @@
 		height: 80rpx;
 		line-height: 80rpx;
 		font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+		
 	}
+
 	.active{
 		color:white;
-		border-bottom: 5rpx solid currentColor;
+		font-size: 46rpx;
+		border-bottom: 6rpx solid #FFCC99;
 	}
 	
 	.tabs_mune {
@@ -108,20 +114,22 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		width: 750rpx;
-		height: 800rpx;
+		/* height: 800rpx; */
+		height: 100%;
 		margin-top: 110rpx;
+		background: linear-gradient(to top, #ffffff ,#0094ff)
 	}
 	.ment_first{
-		background-color: #f6f5f5;
+		background-color:#ffffff ;
 		border: 2rpx solid #808080;
 		border-radius: 8rpx;
-		color: #333333;
+		color: black;
 		font-size: 30rpx;
 		font-weight: 500;
 		text-align: center;
 		line-height: 100rpx;
 		width: 48%;
 		height: 100rpx;
-		margin: 5rpx 2rpx;
+		margin: 5rpx 0rpx;
 	}
 </style>
