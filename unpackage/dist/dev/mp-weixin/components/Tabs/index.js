@@ -184,7 +184,7 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 
 //
 //
 var _default = { props: { tabs: Array }, data: function data() {return { // canteenData:store.state.textImg,
-      canteenDataOne: [], canteenDataTwe: [], canteenDataThree: [], baseUrl: _index.default.state.count, numsu: 0 };}, methods: { hanldeItemTap: function hanldeItemTap(e) {var index = e;this.$emit("itemChange", index);uni.pageScrollTo({ scrollTop: 0, duration: 300 });}, skip: function skip(e) {var index = e;_index.default.commit('increment', index);} }, mounted: function mounted() {var _this = this;var textm = _index.default.state.textImg;textm.forEach(function (v, i, a) {if (i <= 24) {_this.canteenDataOne.push(v);} else if (i >= 25 && i <= 55) {
+      canteenDataOne: [], canteenDataTwe: [], canteenDataThree: [], baseUrl: _index.default.state.count, numsu: 0 };}, methods: { hanldeItemTap: function hanldeItemTap(e) {var index = e;this.$emit("itemChange", index);uni.pageScrollTo({ scrollTop: 0, duration: 300 });}, skip: function skip(e) {var index = e;_index.default.commit('increment', index);} }, mounted: function mounted() {var _this = this;var textm = _index.default.state.textImg;textm.forEach(function (v, i, a) {if (i <= 24) {_this.canteenDataOne.push(v);} else if (i >= 25 && i < 53) {
         _this.canteenDataTwe.push(v);
 
       } else {

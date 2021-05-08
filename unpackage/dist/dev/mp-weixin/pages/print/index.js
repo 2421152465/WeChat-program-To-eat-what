@@ -143,6 +143,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _index = _interopRequireDefault(__webpack_require__(/*! ../../store/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -155,9 +158,10 @@ var _index = _interopRequireDefault(__webpack_require__(/*! ../../store/index.js
 //
 //
 //
-var _default = { data: function data() {return { text: _index.default.state.count, dhhm: _index.default.state.dianhua };}, methods: { calldh: function calldh() {wx.makePhoneCall({ phoneNumber: this.dhhm });
-    } },
-
+//
+//
+//
+var _default = { data: function data() {return { text: _index.default.state.count, dhhm: _index.default.state.dianhua, texs: _index.default.state.texs };}, methods: { calldh: function calldh() {wx.makePhoneCall({ phoneNumber: this.dhhm });} },
 
 
   onLoad: function onLoad(options) {

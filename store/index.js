@@ -7,6 +7,7 @@ const store = new Vuex.Store({
 	state:{
 		count:'',
 		dianhua:'',
+		texs:'',
 		textImg: [
 			{																								
 				name:"水饺烩面",
@@ -193,11 +194,6 @@ const store = new Vuex.Store({
 				image:"https://t1.picb.cc/uploads/2021/03/09/Z7oOP8.jpg",
 				sjHao:"18749573562"
 			},
-			{																																									
-				name:"海鲜·粉面王",
-				image:"https://t1.picb.cc/uploads/2021/03/09/Z7ocVa.jpg",
-				sjHao:"15939562386"
-			},
 			{																																								
 				name:"二楼黄焖鸡",
 				image:"https://t1.picb.cc/uploads/2021/03/09/Z7o4Yv.jpg",
@@ -214,9 +210,9 @@ const store = new Vuex.Store({
 				sjHao:"13271235335"
 			},
 			{																																		
-				name:"螺丝粉·酸辣粉",
-				image:"https://t1.picb.cc/uploads/2021/03/09/Z7olM1.jpg",
-				sjHao:"88888"
+				name:"老碗面",
+				image:"https://t1.picb.cc/uploads/2021/05/06/ZKuZjL.jpg",
+				sjHao:"18837436398"
 			},
 			{																															
 				name:"瓦罐面	",
@@ -307,6 +303,11 @@ const store = new Vuex.Store({
 			},
 			//下面“三楼菜谱”
 			{
+				name:"金牌套餐",
+				image:"https://t1.picb.cc/uploads/2021/05/06/ZKuwYW.jpg",
+				sjHao:"*******"
+			},
+			{
 				name:"五谷鱼粉",
 				image:"https://t1.picb.cc/uploads/2021/03/08/Z7TSIT.jpg",
 				sjHao:"18039997086"
@@ -379,7 +380,8 @@ const store = new Vuex.Store({
 	mutations:{
 		increment(state,v){
 			state.count = state.textImg[v].image;
-			state.dianhua = state.textImg[v].sjHao
+			state.dianhua = state.textImg[v].sjHao;
+			state.texs = state.textImg[v].name;
 			// state.textImg.forEach((item)=>{
 			// 	state.imgsList.push(item.image)
 			// })

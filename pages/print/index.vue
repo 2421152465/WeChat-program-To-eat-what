@@ -1,10 +1,13 @@
 <template>
 <view>
 	<view >
-		<button @click="calldh"class="btncall">ğŸ“å‘¼å«</button>
+		<button @click="calldh" class="btncall">ğŸ“å‘¼å«</button>
 	</view>
 	<view class="print">
-		<image :src="text"  class="imageu" ></image>
+		<image :src="text"  class="imageu" alt='Í¼Æ¬¼ÓÔØÖÖ'></image>
+	</view>
+	<view class="texex">
+			{{texs}}
 	</view>
 </view>
 	
@@ -17,6 +20,7 @@
 			return{
 				text:store.state.count,
 				dhhm:store.state.dianhua,
+				texs:store.state.texs
 			}
 		},
 		methods:{
@@ -48,15 +52,23 @@
 		justify-content: center;
 		align-content: center; */
 		width: 750rpx;
-
+		margin-top: 6rpx;
 	}
 	.imageu{
 		width:100%;
 		height: 700rpx;
-		border-radius: 20rpx;
+/* 		border-radius: 20rpx; */
 	}
 	.btncall{
-		background-color: #07c160;
-		color: white;
+		/* background-color: #f1908c;
+		color: #1781b5; */
+		background-color:#1781b5;
+	}
+	.texex{
+		text-align: center;
+		font-size: 100rpx;
+		color:#1781b5 ;
+		font-weight: 400;
+		text-shadow: 2px 2px 2px #9ea59b;
 	}
 </style>

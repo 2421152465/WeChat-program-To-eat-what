@@ -24,7 +24,7 @@
 			</block>
 			<block v-if="tabs[2].whether">
 				<navigator class="ment_first" v-for="(item,index) in canteenDataThree"
-				 :key="item.id" url="../../pages/print/index" @click="skip(index+56)">
+				 :key="item.id" url="../../pages/print/index" @click="skip(index+53)">
 						{{item.name}}
 				</navigator>
 			</block>
@@ -68,7 +68,7 @@
 				if(i<=24){
 					this.canteenDataOne.push(v);
 
-				}else if(i>=25&&i<=55){
+				}else if(i>=25&&i<53){
 					this.canteenDataTwe.push(v);
 
 				}else{
@@ -89,8 +89,10 @@
 		right: 0;
 		top: 0;
 		z-index: 9;
-		background-color: #0094ff;
-		color:#e2e2e2
+		background-color:#1781b5;
+		color:#FFCC99;
+		/* color:#f1908c; */
+		font-weight: bold;
 	}
 	.title_item{
 		flex: 1; 
@@ -106,7 +108,7 @@
 	.active{
 		color:white;
 		font-size: 46rpx;
-		border-bottom: 6rpx solid #FFCC99;
+		border-bottom: 6rpx solid #ffffff;
 	}
 	
 	.tabs_mune {
@@ -117,19 +119,29 @@
 		/* height: 800rpx; */
 		height: 100%;
 		margin-top: 110rpx;
-		background: linear-gradient(to top, #ffffff ,#0094ff)
+		/* background: linear-gradient(to top, #ffffff ,#0094ff) */
+		background-color:#FFFFFF ;
 	}
 	.ment_first{
-		background-color:#ffffff ;
-		border: 2rpx solid #808080;
-		border-radius: 8rpx;
-		color: black;
-		font-size: 30rpx;
-		font-weight: 500;
+		/* background-color:#ffffff ; */
+		/* border: 2rpx solid #808080; */
+		background-color: #f1908c ;
+		/* border-radius: 26rpx; */
+		
+		color: #1781b5;
+		font-size: 40rpx;
+		font-weight: bold;
+		letter-spacing:6rpx;
 		text-align: center;
-		line-height: 100rpx;
-		width: 48%;
-		height: 100rpx;
+		line-height: 160rpx;
+		width: 46%;
+		height: 160rpx;
 		margin: 5rpx 0rpx;
+	}
+	.ment_first:nth-child(2n+1){
+		border-radius: 26rpx 0 0 26rpx;
+	}
+	.ment_first:nth-child(2n){
+		border-radius: 0 26rpx 26rpx  0;
 	}
 </style>

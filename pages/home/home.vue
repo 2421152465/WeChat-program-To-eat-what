@@ -77,8 +77,10 @@
 	  right: 0;
 	  bottom: 600rpx;
 	  width: 750rpx;
-	  height: 200rpx;
+	  height: 250rpx;
 	  text-align: center;
+		color: #1781b5;
+		background-color: #F1908c ;
 	}
 	.content_title view{
 	  padding: 20rpx;
@@ -104,7 +106,7 @@
 	
 	
 	.active{
-		background-color: #007bff;
+		background-color: #1781b5;
 		color: white;
 	}
 </style>
