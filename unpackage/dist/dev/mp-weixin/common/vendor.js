@@ -10,6 +10,56 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.createPlugin = createPlugin;exports.createSubpackageApp = createSubpackageApp;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
 
+function b64DecodeUnicode(str) {
+  return decodeURIComponent(atob(str).split('').map(function (c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+}
+
+function getCurrentUserInfo() {
+  var token = wx.getStorageSync('uni_id_token') || '';
+  var tokenArr = token.split('.');
+  if (!token || tokenArr.length !== 3) {
+    return {
+      uid: null,
+      role: [],
+      permission: [],
+      tokenExpired: 0 };
+
+  }
+  var userInfo;
+  try {
+    userInfo = JSON.parse(b64DecodeUnicode(tokenArr[1]));
+  } catch (error) {
+    throw new Error('获取当前用户信息出错，详细错误信息为：' + error.message);
+  }
+  userInfo.tokenExpired = userInfo.exp * 1000;
+  delete userInfo.exp;
+  delete userInfo.iat;
+  return userInfo;
+}
+
+function uniIdMixin(Vue) {
+  Vue.prototype.uniIDHasRole = function (roleId) {var _getCurrentUserInfo =
+
+
+    getCurrentUserInfo(),role = _getCurrentUserInfo.role;
+    return role.indexOf(roleId) > -1;
+  };
+  Vue.prototype.uniIDHasPermission = function (permissionId) {var _getCurrentUserInfo2 =
+
+
+    getCurrentUserInfo(),permission = _getCurrentUserInfo2.permission;
+    return this.uniIDHasRole('admin') || permission.indexOf(permissionId) > -1;
+  };
+  Vue.prototype.uniIDTokenValid = function () {var _getCurrentUserInfo3 =
+
+
+    getCurrentUserInfo(),tokenExpired = _getCurrentUserInfo3.tokenExpired;
+    return tokenExpired > Date.now();
+  };
+}
+
 var _toString = Object.prototype.toString;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -232,10 +282,14 @@ var promiseInterceptor = {
     if (!isPromise(res)) {
       return res;
     }
-    return res.then(function (res) {
-      return res[1];
-    }).catch(function (res) {
-      return res[0];
+    return new Promise(function (resolve, reject) {
+      res.then(function (res) {
+        if (res[0]) {
+          reject(res[0]);
+        } else {
+          resolve(res[1]);
+        }
+      });
     });
   } };
 
@@ -822,7 +876,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"my3-project","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"my3-project","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -928,6 +982,11 @@ function initProperties(props) {var isBehavior = arguments.length > 1 && argumen
     properties.generic = {
       type: Object,
       value: null };
+
+    // scopedSlotsCompiler auto
+    properties.scopedSlotsCompiler = {
+      type: String,
+      value: '' };
 
     properties.vueSlots = { // 小程序不能直接定义 $slots 的 props，所以通过 vueSlots 转换到 $slots
       type: null,
@@ -1324,11 +1383,14 @@ function initScopedSlotsParams() {
   };
 
   _vue.default.prototype.$setScopedSlotsParams = function (name, value) {
-    var vueId = this.$options.propsData.vueId;
-    var object = center[vueId] = center[vueId] || {};
-    object[name] = value;
-    if (parents[vueId]) {
-      parents[vueId].$forceUpdate();
+    var vueIds = this.$options.propsData.vueId;
+    if (vueIds) {
+      var vueId = vueIds.split(',')[0];
+      var object = center[vueId] = center[vueId] || {};
+      object[name] = value;
+      if (parents[vueId]) {
+        parents[vueId].$forceUpdate();
+      }
     }
   };
 
@@ -1355,6 +1417,7 @@ function parseBaseApp(vm, _ref3)
   if (vm.$options.store) {
     _vue.default.prototype.$store = vm.$options.store;
   }
+  uniIdMixin(_vue.default);
 
   _vue.default.prototype.mpHost = "mp-weixin";
 
@@ -1733,6 +1796,7 @@ function createSubpackageApp(vm) {
   var app = getApp({
     allowDefault: true });
 
+  vm.$scope = app;
   var globalData = app.globalData;
   if (globalData) {
     Object.keys(appOptions.globalData).forEach(function (name) {
@@ -1748,17 +1812,17 @@ function createSubpackageApp(vm) {
   });
   if (isFn(appOptions.onShow) && wx.onAppShow) {
     wx.onAppShow(function () {for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {args[_key5] = arguments[_key5];}
-      appOptions.onShow.apply(app, args);
+      vm.__call_hook('onShow', args);
     });
   }
   if (isFn(appOptions.onHide) && wx.onAppHide) {
     wx.onAppHide(function () {for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {args[_key6] = arguments[_key6];}
-      appOptions.onHide.apply(app, args);
+      vm.__call_hook('onHide', args);
     });
   }
   if (isFn(appOptions.onLaunch)) {
     var args = wx.getLaunchOptionsSync && wx.getLaunchOptionsSync();
-    appOptions.onLaunch.call(app, args);
+    vm.__call_hook('onLaunch', args);
   }
   return vm;
 }
@@ -6489,7 +6553,7 @@ function initProps (vm, propsOptions) {
       defineReactive$$1(props, key, value, function () {
         if (!isRoot && !isUpdatingChildComponent) {
           {
-            if(vm.mpHost === 'mp-baidu'){//百度 observer 在 setData callback 之后触发，直接忽略该 warn
+            if(vm.mpHost === 'mp-baidu' || vm.mpHost === 'mp-kuaishou'){//百度、快手 observer 在 setData callback 之后触发，直接忽略该 warn
                 return
             }
             //fixed by xxxxxx __next_tick_pending,uni://form-field 时不告警
@@ -7336,7 +7400,8 @@ function _diff(current, pre, path, result) {
                 var currentType = type(currentValue);
                 var preType = type(preValue);
                 if (currentType != ARRAYTYPE && currentType != OBJECTTYPE) {
-                    if (currentValue != pre[key]) {
+                    // NOTE 此处将 != 修改为 !==。涉及地方太多恐怕测试不到，如果出现数据对比问题，将其修改回来。
+                    if (currentValue !== pre[key]) {
                         setResult(result, (path == '' ? '' : path + ".") + key, currentValue);
                     }
                 } else if (currentType == ARRAYTYPE) {
@@ -7395,7 +7460,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"my3-project","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_NAME":"my3-project","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7416,14 +7481,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"my3-project","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"my3-project","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"my3-project","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"my3-project","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7509,7 +7574,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"my3-project","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"my3-project","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8109,14 +8174,14 @@ var store = new _vuex.default.Store({
     texs: '',
     textImg: [
     {
-      name: "水饺烩面",
-      image: "https://t1.picb.cc/uploads/2021/03/09/ZhyMzF.jpg",
-      sjHao: "13137431619" },
+      name: "炸鸡汉堡",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRvbJr.jpg",
+      sjHao: "18611186804" },
 
     {
 
-      name: "汉堡鸡翅",
-      image: "https://t1.picb.cc/uploads/2021/03/09/ZhyroT.jpg",
+      name: "重庆小面",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wR3E0r.jpg",
       sjHao: "13137431619" },
 
     {
@@ -8127,8 +8192,8 @@ var store = new _vuex.default.Store({
 
     {
 
-      name: "优质UMI鸡扒饭",
-      image: "https://t1.picb.cc/uploads/2021/03/09/Zhy3rd.jpg",
+      name: "擂椒拌饭",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wR3KoJ.jpg",
       sjHao: "******" },
 
     {
@@ -8163,14 +8228,14 @@ var store = new _vuex.default.Store({
 
     {
 
-      name: "鱼粉小镇",
-      image: "https://t1.picb.cc/uploads/2021/03/09/ZhyR58.jpg",
+      name: "泡泡鱼",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wR3DHF.jpg",
       sjHao: "******" },
 
     {
 
-      name: "油饼母鸡汤	",
-      image: "https://t1.picb.cc/uploads/2021/03/09/Zhyayu.jpg",
+      name: "咸肉菜饭	",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRNuWX.jpg",
       sjHao: "******" },
 
     {
@@ -8187,8 +8252,8 @@ var store = new _vuex.default.Store({
 
     {
 
-      name: "一品鲜大肉包",
-      image: "https://t1.picb.cc/uploads/2021/03/09/ZhyLmG.jpg",
+      name: "黄焖鸡",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRNlig.jpg",
       sjHao: "******" },
 
     {
@@ -8229,8 +8294,8 @@ var store = new _vuex.default.Store({
 
     {
 
-      name: "铁板煎肉饭",
-      image: "https://t1.picb.cc/uploads/2021/03/09/ZhyBTw.jpg",
+      name: "茶油炒饭",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRNCxG.jpg",
       sjHao: "******" },
 
     {
@@ -8241,8 +8306,8 @@ var store = new _vuex.default.Store({
 
     {
 
-      name: "火锅粉	",
-      image: "https://t1.picb.cc/uploads/2021/03/09/ZhyWir.jpg",
+      name: "筷来见面	",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRQVEe.jpg",
       sjHao: "******" },
 
     {
@@ -8253,8 +8318,8 @@ var store = new _vuex.default.Store({
 
     {
 
-      name: "螺丝粉",
-      image: "https://t1.picb.cc/uploads/2021/03/09/ZhypDi.jpg",
+      name: "麻辣香锅",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRQfZT.jpg",
       sjHao: "******" },
 
     //下面“二楼”
@@ -8264,14 +8329,19 @@ var store = new _vuex.default.Store({
       sjHao: "15563943368" },
 
     {
-      name: "沙县小吃",
-      image: "https://t1.picb.cc/uploads/2021/03/09/Z7okV6.jpg",
-      sjHao: "18703742495" },
+      name: "烩面王",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRjhL1.jpg",
+      sjHao: "15537476152" },
 
     {
-      name: "铁板烧	",
-      image: "https://t1.picb.cc/uploads/2021/03/09/Z7o2fe.jpg",
-      sjHao: "18237472926" },
+      name: "泡泡鸡	",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRj7h0.jpg",
+      sjHao: "13733643389" },
+
+    {
+      name: "荞麦面	",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRjrBT.jpg",
+      sjHao: "16603741059" },
 
     {
       name: "咸肉菜饭	",
@@ -8279,9 +8349,14 @@ var store = new _vuex.default.Store({
       sjHao: "13271190950" },
 
     {
-      name: "茶泡饭·煲仔饭",
-      image: "https://t1.picb.cc/uploads/2021/03/09/Z7oqgg.jpg",
-      sjHao: "15953253811" },
+      name: "板面",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRjA4t.jpg",
+      sjHao: "13193463191" },
+
+    {
+      name: "螺丝粉",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRjOKr.jpg",
+      sjHao: "13193463191" },
 
     {
       name: "麻辣香锅	",
@@ -8296,12 +8371,12 @@ var store = new _vuex.default.Store({
     {
       name: "二楼黄焖鸡",
       image: "https://t1.picb.cc/uploads/2021/03/09/Z7o4Yv.jpg",
-      sjHao: "13608483577" },
+      sjHao: "17639595391" },
 
     {
       name: "胡闯鱼粉",
       image: "https://t1.picb.cc/uploads/2021/03/09/Z7o1jD.jpg",
-      sjHao: "18798923300" },
+      sjHao: "18790923300" },
 
     {
       name: "盖浇饭",
@@ -8319,14 +8394,14 @@ var store = new _vuex.default.Store({
       sjHao: "18903996257" },
 
     {
+      name: "卤肉面	",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRjMbF.jpg",
+      sjHao: "13707602570" },
+
+    {
       name: "过桥米线	",
       image: "https://t1.picb.cc/uploads/2021/03/09/Z7orvL.jpg",
       sjHao: "18838938928" },
-
-    {
-      name: "锡纸饱饭",
-      image: "https://t1.picb.cc/uploads/2021/03/09/Z7dEKj.jpg",
-      sjHao: "13271231886" },
 
     {
       name: "鹅一派",
@@ -8347,7 +8422,7 @@ var store = new _vuex.default.Store({
     {
       name: "天下好面",
       image: "https://t1.picb.cc/uploads/2021/03/09/Z7doLN.jpg",
-      sjHao: "15188523952" },
+      sjHao: "16649789915" },
 
     {
       name: "煎饼·热干面",
@@ -8373,7 +8448,7 @@ var store = new _vuex.default.Store({
     {
       name: "重庆鸡公煲",
       image: "https://t1.picb.cc/uploads/2021/03/09/Z7omGu.jpg",
-      sjHao: "17033565086" },
+      sjHao: "17633565086" },
 
     {
       name: "披萨意面	",
@@ -8396,35 +8471,35 @@ var store = new _vuex.default.Store({
       sjHao: "15139466859" },
 
     {
-      name: "咖喱大叔",
-      image: "https://t1.picb.cc/uploads/2021/03/09/Z7oA6w.jpg",
-      sjHao: "16637415939" },
+      name: "30秒牛排烧",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRj8JM.jpg",
+      sjHao: "15637415220" },
+
+    {
+      name: "麻辣爆肚",
+      image: "https://t1.picb.cc/uploads/2021/11/09/wEjpZv.jpg",
+      sjHao: "18237403709" },
 
     //下面“三楼菜谱”
     {
-      name: "金牌套餐",
-      image: "https://t1.picb.cc/uploads/2021/05/06/ZKuwYW.jpg",
+      name: "陈老伍麻辣烫",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRjsjj.jpg",
       sjHao: "*******" },
 
     {
-      name: "五谷鱼粉",
-      image: "https://t1.picb.cc/uploads/2021/03/08/Z7TSIT.jpg",
-      sjHao: "18039997086" },
+      name: "重庆特色面",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRjzYc.jpg",
+      sjHao: "18324330121" },
+
+    {
+      name: "大盘鸡",
+      image: "https://t1.picb.cc/uploads/2021/11/26/fkXnHJ.jpg",
+      sjHao: "13839562524" },
 
     {
       name: "黄焖鸡米饭",
       image: "https://t1.picb.cc/uploads/2021/03/09/Z7YjQc.jpg",
       sjHao: "15290960510" },
-
-    {
-      name: "黄焖鸡米饭",
-      image: "https://t1.picb.cc/uploads/2021/03/09/Z7YjQc.jpg",
-      sjHao: "15290960510" },
-
-    {
-      name: "过桥米线",
-      image: "https://t1.picb.cc/uploads/2021/03/09/Z7YLmt.jpg",
-      sjHao: "17630302869" },
 
     {
       name: "胖孩土豆粉",
@@ -8445,9 +8520,9 @@ var store = new _vuex.default.Store({
 
     {
 
-      name: "烤鱼饭",
-      image: "https://t1.picb.cc/uploads/2021/03/09/Z7YDnJ.jpg",
-      sjHao: "15939509906" },
+      name: "牛肉面",
+      image: "https://t1.picb.cc/uploads/2021/10/20/wRjElK.jpg",
+      sjHao: "18039991145" },
 
     {
       name: "阳春面",

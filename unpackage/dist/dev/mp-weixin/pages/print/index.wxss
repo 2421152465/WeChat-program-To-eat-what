@@ -1,4 +1,11 @@
 
+.bot image.data-v-6b1e3307{
+		width: 100%;
+		height: 180rpx;
+		position: absolute;
+		left: 0;
+		bottom: 20rpx;
+}
 .print.data-v-6b1e3307{
 		/*width: 750rpx;
 		 padding-top: 6rpx;

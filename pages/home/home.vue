@@ -52,6 +52,7 @@
 					})
 				}
 			},
+		
 			spak(){
 				const index = this.index;
 				store.commit("increment",index)
@@ -79,8 +80,8 @@
 	  width: 750rpx;
 	  height: 250rpx;
 	  text-align: center;
-		color: #1781b5;
-		background-color: #F1908c ;
+		color: #1a2933;
+		background-color: rgb(148, 200, 116) ;
 	}
 	.content_title view{
 	  padding: 20rpx;
@@ -106,7 +107,7 @@
 	
 	
 	.active{
-		background-color: #1781b5;
+		background-color: #2550b5;
 		color: white;
 	}
 </style>

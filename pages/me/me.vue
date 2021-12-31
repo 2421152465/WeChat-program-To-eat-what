@@ -14,13 +14,10 @@
 			</view>
 			<view class="top_tw">
 				<image src="../../static/icon/gong.png" mode="widthFix"></image>
-			注意:一楼基本没有外卖
+				最新更新时间:2021/11/26
 			</view>
-			<view class="top_tw">
-				<view style="color: red;">
-					E-mail: 2421152465@qq.com
-				</view>
-			</view>
+			
+			<view>'本校学生个人娱乐开发' QQ:2421152465</view>
 			
 	</view>
 
@@ -34,7 +31,6 @@
 			}
 		},
 		methods: {
-			
 		}
 	}
 </script>

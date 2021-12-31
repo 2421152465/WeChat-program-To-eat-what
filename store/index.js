@@ -10,14 +10,14 @@ const store = new Vuex.Store({
 		texs:'',
 		textImg: [
 			{																								
-				name:"水饺烩面",
-				image:"https://t1.picb.cc/uploads/2021/03/09/ZhyMzF.jpg",
-				sjHao:"13137431619"
+				name:"炸鸡汉堡",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRvbJr.jpg",
+				sjHao:"18611186804"
 			},
 			{
 																										
-				name:"汉堡鸡翅",
-				image:"https://t1.picb.cc/uploads/2021/03/09/ZhyroT.jpg",
+				name:"重庆小面",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wR3E0r.jpg",
 				sjHao:"13137431619"
 			},
 			{
@@ -28,8 +28,8 @@ const store = new Vuex.Store({
 			},
 			{
 																								
-				name:"优质UMI鸡扒饭",
-				image:"https://t1.picb.cc/uploads/2021/03/09/Zhy3rd.jpg",
+				name:"擂椒拌饭",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wR3KoJ.jpg",
 				sjHao:"******"
 			},
 			{
@@ -64,14 +64,14 @@ const store = new Vuex.Store({
 			},
 			{
 																			
-				name:"鱼粉小镇",
-				image:"https://t1.picb.cc/uploads/2021/03/09/ZhyR58.jpg",
+				name:"泡泡鱼",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wR3DHF.jpg",
 				sjHao:"******"
 			},
 			{
 																		
-				name:"油饼母鸡汤	",
-				image:"https://t1.picb.cc/uploads/2021/03/09/Zhyayu.jpg",
+				name:"咸肉菜饭	",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRNuWX.jpg",
 				sjHao:"******"
 			},
 			{
@@ -88,8 +88,8 @@ const store = new Vuex.Store({
 			},
 			{
 																	
-				name:"一品鲜大肉包",
-				image:"https://t1.picb.cc/uploads/2021/03/09/ZhyLmG.jpg",
+				name:"黄焖鸡",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRNlig.jpg",
 				sjHao:"******"
 			},
 			{
@@ -130,8 +130,8 @@ const store = new Vuex.Store({
 			},
 			{
 													
-				name:"铁板煎肉饭",
-				image:"https://t1.picb.cc/uploads/2021/03/09/ZhyBTw.jpg",
+				name:"茶油炒饭",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRNCxG.jpg",
 				sjHao:"******"
 			},
 			{
@@ -142,8 +142,8 @@ const store = new Vuex.Store({
 			},
 			{
 									
-				name:"火锅粉	",
-				image:"https://t1.picb.cc/uploads/2021/03/09/ZhyWir.jpg",
+				name:"筷来见面	",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRQVEe.jpg",
 				sjHao:"******"
 			},
 			{
@@ -154,8 +154,8 @@ const store = new Vuex.Store({
 			},
 			{
 						
-				name:"螺丝粉",
-				image:"https://t1.picb.cc/uploads/2021/03/09/ZhypDi.jpg",
+				name:"麻辣香锅",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRQfZT.jpg",
 				sjHao:"******"
 			},
 			//下面“二楼”
@@ -165,24 +165,34 @@ const store = new Vuex.Store({
 				sjHao:"15563943368"
 			},
 			{
-				name:"沙县小吃",
-				image:"https://t1.picb.cc/uploads/2021/03/09/Z7okV6.jpg",
-				sjHao:"18703742495"
+				name:"烩面王",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRjhL1.jpg",
+				sjHao:"15537476152"
 			},
 			{							
-				name:"铁板烧	",
-				image:"https://t1.picb.cc/uploads/2021/03/09/Z7o2fe.jpg",
-				sjHao:"18237472926"
+				name:"泡泡鸡	",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRj7h0.jpg",
+				sjHao:"13733643389"
+			},
+			{
+				name:"荞麦面	",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRjrBT.jpg",
+				sjHao:"16603741059"
 			},
 			{						
 				name:"咸肉菜饭	",
 				image:"https://t1.picb.cc/uploads/2021/03/09/Z7ddhK.jpg",
 				sjHao:"13271190950"
 			},
-			{					
-				name:"茶泡饭·煲仔饭",
-				image:"https://t1.picb.cc/uploads/2021/03/09/Z7oqgg.jpg",
-				sjHao:"15953253811"
+			{
+				name:"板面",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRjA4t.jpg",
+				sjHao:"13193463191"
+			},
+			{
+				name:"螺丝粉",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRjOKr.jpg",
+				sjHao:"13193463191"
 			},
 			{																																													
 				name:"麻辣香锅	",
@@ -197,12 +207,12 @@ const store = new Vuex.Store({
 			{																																								
 				name:"二楼黄焖鸡",
 				image:"https://t1.picb.cc/uploads/2021/03/09/Z7o4Yv.jpg",
-				sjHao:"13608483577"
+				sjHao:"17639595391"
 			},
 			{																																						
 				name:"胡闯鱼粉",
 				image:"https://t1.picb.cc/uploads/2021/03/09/Z7o1jD.jpg",
-				sjHao:"18798923300"
+				sjHao:"18790923300"
 			},
 			{																																				
 				name:"盖浇饭",
@@ -219,15 +229,15 @@ const store = new Vuex.Store({
 				image:"https://t1.picb.cc/uploads/2021/03/09/Z7dYlc.jpg",
 				sjHao:"18903996257"
 			},
+			{
+				name:"卤肉面	",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRjMbF.jpg",
+				sjHao:"13707602570"
+			},
 			{																														
 				name:"过桥米线	",
 				image:"https://t1.picb.cc/uploads/2021/03/09/Z7orvL.jpg",
 				sjHao:"18838938928"
-			},
-			{																														
-				name:"锡纸饱饭",
-				image:"https://t1.picb.cc/uploads/2021/03/09/Z7dEKj.jpg",
-				sjHao:"13271231886"
 			},
 			{																											
 				name:"鹅一派",
@@ -248,7 +258,7 @@ const store = new Vuex.Store({
 			{																					
 				name:"天下好面",
 				image:"https://t1.picb.cc/uploads/2021/03/09/Z7doLN.jpg",
-				sjHao:"15188523952"
+				sjHao:"16649789915"
 			},
 			{																			
 				name:"煎饼·热干面",
@@ -274,7 +284,7 @@ const store = new Vuex.Store({
 			{												
 				name:"重庆鸡公煲",
 				image:"https://t1.picb.cc/uploads/2021/03/09/Z7omGu.jpg",
-				sjHao:"17033565086"
+				sjHao:"17633565086"
 			},
 			{										
 				name:"披萨意面	",
@@ -297,35 +307,35 @@ const store = new Vuex.Store({
 				sjHao:"15139466859"
 			},
 			{					
-				name:"咖喱大叔",
-				image:"https://t1.picb.cc/uploads/2021/03/09/Z7oA6w.jpg",
-				sjHao:"16637415939"
+				name:"30秒牛排烧",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRj8JM.jpg",
+				sjHao:"15637415220"
+			},
+			{
+				name:"麻辣爆肚",
+				image:"https://t1.picb.cc/uploads/2021/11/09/wEjpZv.jpg",
+				sjHao:"18237403709"
 			},
 			//下面“三楼菜谱”
 			{
-				name:"金牌套餐",
-				image:"https://t1.picb.cc/uploads/2021/05/06/ZKuwYW.jpg",
+				name:"陈老伍麻辣烫",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRjsjj.jpg",
 				sjHao:"*******"
 			},
 			{
-				name:"五谷鱼粉",
-				image:"https://t1.picb.cc/uploads/2021/03/08/Z7TSIT.jpg",
-				sjHao:"18039997086"
+				name:"重庆特色面",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRjzYc.jpg",
+				sjHao:"18324330121"
+			},
+			{
+				name:"大盘鸡",
+				image:"https://t1.picb.cc/uploads/2021/11/26/fkXnHJ.jpg",
+				sjHao:"13839562524"
 			},
 			{
 				name:"黄焖鸡米饭",
 				image:"https://t1.picb.cc/uploads/2021/03/09/Z7YjQc.jpg",
 				sjHao:"15290960510"
-			},
-			{
-				name:"黄焖鸡米饭",
-				image:"https://t1.picb.cc/uploads/2021/03/09/Z7YjQc.jpg",
-				sjHao:"15290960510"
-			},
-			{
-				name:"过桥米线",
-				image:"https://t1.picb.cc/uploads/2021/03/09/Z7YLmt.jpg",
-				sjHao:"17630302869"
 			},
 			{
 				name:"胖孩土豆粉",
@@ -346,9 +356,9 @@ const store = new Vuex.Store({
 			},
 			{
 									
-				name:"烤鱼饭",
-				image:"https://t1.picb.cc/uploads/2021/03/09/Z7YDnJ.jpg",
-				sjHao:"15939509906"
+				name:"牛肉面",
+				image:"https://t1.picb.cc/uploads/2021/10/20/wRjElK.jpg",
+				sjHao:"18039991145"
 			},
 			{
 				name:"阳春面",

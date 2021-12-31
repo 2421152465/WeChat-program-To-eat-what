@@ -1,4 +1,7 @@
 
+[v-cloak]{
+	display: none!important ;
+}
 .tabs_title{
 	display: -webkit-box;
 	display: -webkit-flex;

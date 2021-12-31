@@ -11,8 +11,8 @@ page.data-v-92bb8f34{
   width: 750rpx;
   height: 250rpx;
   text-align: center;
-	color: #1781b5;
-	background-color: #F1908c ;
+	color: #1a2933;
+	background-color: rgb(148, 200, 116) ;
 }
 .content_title view.data-v-92bb8f34{
   padding: 20rpx;
@@ -36,7 +36,7 @@ page.data-v-92bb8f34{
 	width: 18px;
 }
 .active.data-v-92bb8f34{
-	background-color: #1781b5;
+	background-color: #2550b5;
 	color: white;
 }
 

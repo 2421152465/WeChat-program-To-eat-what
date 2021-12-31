@@ -1,5 +1,5 @@
 <template>
-	<view class="tabs">
+	<view class="tabs" v-cloak>
 		<view class="tabs_title">
 			<view v-for="(item,index) in tabs" :key="index"
 			 class="title_item"
@@ -24,11 +24,12 @@
 			</block>
 			<block v-if="tabs[2].whether">
 				<navigator class="ment_first" v-for="(item,index) in canteenDataThree"
-				 :key="item.id" url="../../pages/print/index" @click="skip(index+53)">
+				 :key="item.id" url="../../pages/print/index" @click="skip(index+56)">
 						{{item.name}}
 				</navigator>
 			</block>
 		</view>
+
 	</view>
 </template>
 
@@ -57,6 +58,7 @@
 					duration:300
 				})
 			}, 	
+				//点击到了（index）按钮 ，发送index给store
 			skip(e){
 				const index = e;
 				store.commit('increment',index)
@@ -68,7 +70,7 @@
 				if(i<=24){
 					this.canteenDataOne.push(v);
 
-				}else if(i>=25&&i<53){
+				}else if(i>=25&&i<56){
 					this.canteenDataTwe.push(v);
 
 				}else{
@@ -81,6 +83,11 @@
 </script>
 
 <style>
+	
+	
+	[v-cloak]{
+		display: none!important ;
+	}
 	.tabs_title{
 		display: flex;
 		text-align: center;

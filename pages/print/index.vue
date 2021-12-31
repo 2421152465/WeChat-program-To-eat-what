@@ -9,6 +9,7 @@
 	<view class="texex">
 			{{texs}}
 	</view>
+
 </view>
 	
 </template>
@@ -45,6 +46,13 @@
 </script>
 
 <style scoped>
+	.bot image{
+		width: 100%;
+		height: 180rpx;
+		position: absolute;
+		left: 0;
+		bottom: 20rpx;
+	}
 	.print{
 		/*width: 750rpx;
 		 padding-top: 6rpx;
